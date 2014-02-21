@@ -1,3 +1,3 @@
 prog2014
 ========
-shelljke - Саган Андрей Владимирович, Ри-220401
+shelljke - Sagan Andrey, Ri-220401
