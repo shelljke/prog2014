@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using DevExpress.XtraReports.UI;
 
 namespace WindowsFormsApplication1
 {
@@ -56,7 +57,12 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void save_Click(object sender, EventArgs e)
+        private void print_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       private void save_Click(object sender, EventArgs e)
         {
             SaveFileDialog sp = new SaveFileDialog() { Filter = "Заказ автомобиля|*.car" };
             var result = sp.ShowDialog(this);
@@ -116,7 +122,7 @@ namespace WindowsFormsApplication1
 
                 //опции
                 c.opt = new List<options>();
-                if (windows.Checked)
+                if (windows.Checked) 
                 {
                     c.opt.Add(options.Стеклоподъемники);
                 }
@@ -176,6 +182,7 @@ namespace WindowsFormsApplication1
 
         private void auto_SelectedIndexChanged(object sender, EventArgs e)
         {
+            print.Enabled = true;
             switch (auto.SelectedItem.ToString())
             {
                 case "Оззи":
@@ -292,14 +299,138 @@ namespace WindowsFormsApplication1
             };
 
         }
+      
+        public car result()
+        {
+            car c = new car();
+
+            switch (auto.SelectedItem.ToString())
+            {
+                case "Инфернус":
+                c.brand = car_brand.Инфернус;
+                break;
+                case "Эсперанто":
+                c.brand = car_brand.Эсперанто;
+                break;
+                case "Оззи":
+                c.brand = car_brand.Оззи;
+                break;
+                case "Туризмо":
+                c.brand = car_brand.Туризмо;
+                break;
+                case "Элегия":
+                c.brand = car_brand.Элегия;
+                break;
+            }
+           if (petrol.Checked)
+           {
+               c.e_type = engine_type.Бензиновый;
+           }
+           else if (diesel.Checked)
+           {
+               c.e_type = engine_type.Дизельный;
+           }
+           else if (electric.Checked)
+           {
+               c.e_type = engine_type.Электрический;
+           }
+             
+      
+           if (p1.Checked)
+           {
+              c.power = p1.Text;
+           }
+           else if (p2.Checked)
+           {
+               c.power = p2.Text;
+           }
+           else if (p3.Checked)
+           {
+               c.power = p3.Text;
+           }
+
+           if (parktronics.Checked)
+           {
+               c.op += "-парктроники                  ";
+           }
+           if (top.Checked)
+           {
+               c.op += "-откидной верх              ";
+           }
+            if (windows.Checked)
+           {
+               c.op += "-стеклоподъемники        ";
+           }
+           if (conditioner.Checked)
+           {
+               c.op += "-кондиционер                  ";
+           }
+           if (airbag.Checked)
+           {
+               c.op += "-подушки безопасности";
+           }
+            return c;
+        }
+ 
+        private void print_Click_1(object sender, EventArgs e)
+        {
+            var c = new car_report();
+            car z = result();
+            c.DataSource = new BindingSource() { DataSource = z };
+            c.ShowPreview();         
+        }
     }
+
+
     public class car
     {
         public car_brand brand { get; set; }
         public engine_power e_power { get; set; }
         public engine_type e_type { get; set; }
         public List<options> opt { get; set; }
+
+        [XmlIgnore]
+        public string power { get; set; }
+        public string op { get; set; }
+        public string result
+ 
+        {
+            get
+        {string res;
+        res = "1";
+                switch (brand)
+                {
+                    case car_brand.Элегия:
+                        res = "Автомобиль Элегия с ";
+                        break;
+                    case car_brand.Инфернус:
+                        res = "Автомобиль Инфернус с ";
+                        break;
+                    case car_brand.Эсперанто:
+                        res = "Автомобиль Эсперанто с ";
+                        break;
+                    case car_brand.Оззи:
+                        res = "Автомобиль Оззи с ";
+                        break;
+                    case car_brand.Туризмо:
+                        res = "Автомобиль Туризмо с ";
+                        break;       
+                }
+
+                if (e_type == engine_type.Бензиновый)
+                    res += "бензиновым двигателем мощностью " + power ;
+                if (e_type == engine_type.Дизельный)
+                    res += "дизельным двигателем мощностью " + power;
+                if (e_type == engine_type.Электрический)
+                    res += "электрическим двигателем мощностью "+ power;  
+
+           return res;
+        }
+        }
+  
     }
+
+
     public enum car_brand
     {
         Эсперанто,

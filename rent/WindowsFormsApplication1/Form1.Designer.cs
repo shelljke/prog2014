@@ -47,6 +47,7 @@
             this.p2 = new System.Windows.Forms.RadioButton();
             this.p3 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.print = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -214,7 +215,7 @@
             // 
             this.save.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.save.Location = new System.Drawing.Point(11, 326);
+            this.save.Location = new System.Drawing.Point(11, 361);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(133, 23);
             this.save.TabIndex = 5;
@@ -226,7 +227,7 @@
             // 
             this.load.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.load.Location = new System.Drawing.Point(150, 326);
+            this.load.Location = new System.Drawing.Point(150, 361);
             this.load.Name = "load";
             this.load.Size = new System.Drawing.Size(133, 23);
             this.load.TabIndex = 5;
@@ -284,11 +285,23 @@
             this.panel1.Size = new System.Drawing.Size(268, 84);
             this.panel1.TabIndex = 6;
             // 
+            // print
+            // 
+            this.print.Enabled = false;
+            this.print.Location = new System.Drawing.Point(11, 332);
+            this.print.Name = "print";
+            this.print.Size = new System.Drawing.Size(272, 23);
+            this.print.TabIndex = 7;
+            this.print.Text = "Печать";
+            this.print.UseVisualStyleBackColor = true;
+            this.print.Click += new System.EventHandler(this.print_Click_1);
+            // 
             // r_auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 361);
+            this.ClientSize = new System.Drawing.Size(291, 396);
+            this.Controls.Add(this.print);
             this.Controls.Add(this.load);
             this.Controls.Add(this.save);
             this.Controls.Add(this.top);
@@ -304,8 +317,8 @@
             this.Controls.Add(this.l_engine);
             this.Controls.Add(this.l_auto);
             this.Controls.Add(this.panel1);
-            this.MaximumSize = new System.Drawing.Size(307, 400);
-            this.MinimumSize = new System.Drawing.Size(307, 400);
+            this.MaximumSize = new System.Drawing.Size(307, 435);
+            this.MinimumSize = new System.Drawing.Size(307, 435);
             this.Name = "r_auto";
             this.Text = "Заказ автомобиля";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -338,6 +351,7 @@
         private System.Windows.Forms.RadioButton p2;
         private System.Windows.Forms.RadioButton p3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button print;
     }
 }
 
