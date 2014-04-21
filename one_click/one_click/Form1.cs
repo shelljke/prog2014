@@ -32,20 +32,32 @@ namespace one_click
             hi.Hide();
             begin.Hide();
             beginpic.Hide();
- 
+
             open.Show();
             save.Show();
             picture.Show();
         }
+
+        private void begin_Click(object sender, EventArgs e)
+        {
+            beginpic_Click_1(sender, EventArgs.Empty);
+        }
+
         public Bitmap origin_size_image, image_l, image_l1;
         public float w, h;
         public int a;
         private void open_Click(object sender, EventArgs e)
         {
+          //  origin_size_image = new Bitmap();
             OpenFileDialog op = new OpenFileDialog() { Filter = "Файл изображения|*.jpg" };
             var result = op.ShowDialog(this);
             if (result == DialogResult.OK)
             {
+                if (origin_size_image != null)
+                {
+                    origin_size_image.Dispose();
+                }
+
                 origin_size_image = (Bitmap)Image.FromFile(op.FileName);
                 w = origin_size_image.Width;
                 h = origin_size_image.Height;
@@ -63,23 +75,17 @@ namespace one_click
                     w = origin_size_image.Width / k;
                 }
 
-
-                Size size_f = new Size((int)w, (int)h);
-
-                image_l = new Bitmap(origin_size_image, size_f);
-               // image_l1 = new Bitmap(origin_size_image, size_f);
+                image_l = new Bitmap(origin_size_image, (int)w, (int)h);
                 inversion();
                 kern(image_l);
                 inv.Image = image_l;
 
-                image_l = new Bitmap(origin_size_image, size_f);
-                image_l1 = new Bitmap(origin_size_image, size_f);
+                image_l = new Bitmap(origin_size_image, (int)w, (int)h);
                 sharpen();
                 kern(image_l);
                 shrp.Image = image_l;
 
-                image_l = new Bitmap(origin_size_image, size_f);
-                image_l1 = new Bitmap(origin_size_image, size_f);
+                image_l = new Bitmap(origin_size_image, (int)w, (int)h);
                 blur();
                 kern(image_l);
                 blr.Image = image_l;
@@ -92,31 +98,26 @@ namespace one_click
                     float k = (float)origin_size_image.Width / 670;
                     w = 670;
                     h = origin_size_image.Height / k;
-                }else if (origin_size_image.Height >= 430 && origin_size_image.Width < origin_size_image.Height)
+                }
+                else if (origin_size_image.Height >= 430 && origin_size_image.Width < origin_size_image.Height)
                 {
-                    float k =(float) origin_size_image.Height / 430;
+                    float k = (float)origin_size_image.Height / 430;
                     h = 430;
                     w = origin_size_image.Width / k;
                 }
 
-                Size size = new Size((int)w, (int)h);
-                image_l = new Bitmap(origin_size_image, size);
-             //   image_l1 = new Bitmap(origin_size_image, size);
-              
+                image_l = new Bitmap(origin_size_image, (int)w, (int)h);
+
                 picture.Image = image_l;
 
                 this.BackColor = Color.Black;
             }
         }
-        private void begin_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void inv_Click(object sender, EventArgs e)
         {
-            Size size = new Size((int)w, (int)h);
-            image_l = new Bitmap(origin_size_image, size);
+            image_l.Dispose();
+            image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             inversion();
             kern(image_l);
             picture.Image = image_l;
@@ -125,8 +126,8 @@ namespace one_click
 
         private void shrp_Click(object sender, EventArgs e)
         {
-            Size size = new Size((int)w, (int)h);
-            image_l = new Bitmap(origin_size_image, size);
+            image_l.Dispose();
+            image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             sharpen();
             kern(image_l);
             picture.Image = image_l;
@@ -135,8 +136,8 @@ namespace one_click
 
         private void blur_Click(object sender, EventArgs e)
         {
-            Size size = new Size((int)w, (int)h);
-            image_l = new Bitmap(origin_size_image, size);
+            image_l.Dispose();
+            image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             blur();
             kern(image_l);
             picture.Image = image_l;
@@ -172,7 +173,7 @@ namespace one_click
 
             div = 1;
             offset = 0;
-            kernel_h = kernel_w = 3;           
+            kernel_h = kernel_w = 3;
         }
 
         void blur()
@@ -200,38 +201,54 @@ namespace one_click
 
         private void save_Click(object sender, EventArgs e)
         {
+            image_l.Dispose();
             var sfd = new SaveFileDialog();
             sfd.Filter = "Файл изображения|*.jpg";
-            image_l = new Bitmap(origin_size_image);
+            image_l = new Bitmap(origin_size_image); 
 
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-
+                
                 var fileName = sfd.FileName;
                 var fileStream = File.Create(sfd.FileName);
 
-              if (a == 1)
-                {
-                    inversion();
-                    kern(image_l);
-                    picture.Image = image_l;
-                } else if (a == 2)
-                {
-                    sharpen();
-                    kern(image_l);
-                } else if (a == 3)
-                {
-                    blur();
-                    kern(image_l);
+                switch (a)
+                {      
+                    case 0:
+
+                        image_l = origin_size_image;
+                        break;
+                    case 1:
+
+                        inversion();
+                        kern(image_l);
+                        break;
+                    case 2:
+
+                        sharpen();
+                        kern(image_l);
+                        break;
+
+                    case 3:
+                        blur();
+                        kern(image_l);
+                        break;
+                       
                 }
-               image_l.Save(fileStream, origin_size_image.RawFormat);
-               fileStream.Close();
+                image_l.Save(fileStream, origin_size_image.RawFormat);
+                fileStream.Close();
+                image_l.Dispose();
             }
         }
 
         Bitmap kern(Bitmap image_l)
         {
+        /*    if (image_l!=null)
+            {
+                image_l.Dispose();
+            }*/
+          
             image_l1 = (Bitmap)image_l.Clone();
             int rSum = 0, gSum = 0, bSum = 0;
             var color = new Color();
@@ -276,7 +293,7 @@ namespace one_click
                     rSum = gSum = bSum = 0;
                 }
             }
-
+            image_l1.Dispose();
             return image_l;
         }
     }

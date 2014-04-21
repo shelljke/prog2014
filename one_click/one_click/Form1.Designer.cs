@@ -59,6 +59,7 @@
             // begin
             // 
             this.begin.AutoSize = true;
+            this.begin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.begin.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F);
             this.begin.Location = new System.Drawing.Point(300, 276);
             this.begin.Name = "begin";
