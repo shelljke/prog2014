@@ -33,7 +33,11 @@
             this.open = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
             this.power = new System.Windows.Forms.TrackBar();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.clock = new System.Windows.Forms.PictureBox();
+            this.pb = new System.Windows.Forms.PictureBox();
+            this.ht = new System.Windows.Forms.PictureBox();
+            this.clg = new System.Windows.Forms.PictureBox();
             this.wlw = new System.Windows.Forms.PictureBox();
             this.nshv = new System.Windows.Forms.PictureBox();
             this.hp = new System.Windows.Forms.PictureBox();
@@ -44,7 +48,10 @@
             this.beginpic = new System.Windows.Forms.PictureBox();
             this.fon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.power)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ht)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wlw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nshv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hp)).BeginInit();
@@ -61,7 +68,7 @@
             this.hi.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F);
             this.hi.Location = new System.Drawing.Point(0, 22);
             this.hi.Name = "hi";
-            this.hi.Size = new System.Drawing.Size(815, 118);
+            this.hi.Size = new System.Drawing.Size(838, 118);
             this.hi.TabIndex = 1;
             this.hi.Text = "Приветствую в программе One Click Image Editor! Для продолжения просто нажмите \"Н" +
     "ачать\", а затем выберите изображение, которое хотите обработать.";
@@ -74,7 +81,7 @@
             this.begin.BackColor = System.Drawing.Color.Transparent;
             this.begin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.begin.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F);
-            this.begin.Location = new System.Drawing.Point(376, 255);
+            this.begin.Location = new System.Drawing.Point(388, 255);
             this.begin.Name = "begin";
             this.begin.Size = new System.Drawing.Size(99, 29);
             this.begin.TabIndex = 2;
@@ -94,7 +101,7 @@
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(554, -4);
+            this.save.Location = new System.Drawing.Point(584, -4);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(261, 23);
             this.save.TabIndex = 4;
@@ -114,23 +121,61 @@
             this.power.TickStyle = System.Windows.Forms.TickStyle.None;
             this.power.Visible = false;
             // 
-            // pictureBox4
+            // backgroundWorker1
             // 
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Location = new System.Drawing.Point(593, 530);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(78, 50);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 9;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.cld_Click);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // clock
+            // 
+            this.clock.Image = global::one_click.Properties.Resources._12205100050348185;
+            this.clock.Location = new System.Drawing.Point(55, 177);
+            this.clock.Name = "clock";
+            this.clock.Size = new System.Drawing.Size(100, 107);
+            this.clock.TabIndex = 12;
+            this.clock.TabStop = false;
+            this.clock.Visible = false;
+            // 
+            // pb
+            // 
+            this.pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb.Location = new System.Drawing.Point(592, 547);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(78, 50);
+            this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pb.TabIndex = 9;
+            this.pb.TabStop = false;
+            this.pb.Click += new System.EventHandler(this.pb_Click);
+            // 
+            // ht
+            // 
+            this.ht.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ht.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ht.Location = new System.Drawing.Point(676, 547);
+            this.ht.Name = "ht";
+            this.ht.Size = new System.Drawing.Size(78, 50);
+            this.ht.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.ht.TabIndex = 9;
+            this.ht.TabStop = false;
+            this.ht.Click += new System.EventHandler(this.ht_Click);
+            // 
+            // clg
+            // 
+            this.clg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.clg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clg.Location = new System.Drawing.Point(760, 547);
+            this.clg.Name = "clg";
+            this.clg.Size = new System.Drawing.Size(78, 50);
+            this.clg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.clg.TabIndex = 9;
+            this.clg.TabStop = false;
+            this.clg.Click += new System.EventHandler(this.clg_Click);
             // 
             // wlw
             // 
             this.wlw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.wlw.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.wlw.Location = new System.Drawing.Point(509, 530);
+            this.wlw.Location = new System.Drawing.Point(508, 547);
             this.wlw.Name = "wlw";
             this.wlw.Size = new System.Drawing.Size(78, 50);
             this.wlw.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -140,9 +185,9 @@
             // 
             // nshv
             // 
-            this.nshv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.nshv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.nshv.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.nshv.Location = new System.Drawing.Point(425, 530);
+            this.nshv.Location = new System.Drawing.Point(424, 547);
             this.nshv.Name = "nshv";
             this.nshv.Size = new System.Drawing.Size(78, 50);
             this.nshv.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -154,7 +199,7 @@
             // 
             this.hp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.hp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hp.Location = new System.Drawing.Point(341, 530);
+            this.hp.Location = new System.Drawing.Point(340, 547);
             this.hp.Name = "hp";
             this.hp.Size = new System.Drawing.Size(78, 50);
             this.hp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -166,7 +211,7 @@
             // 
             this.cld.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.cld.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cld.Location = new System.Drawing.Point(257, 530);
+            this.cld.Location = new System.Drawing.Point(256, 547);
             this.cld.Name = "cld";
             this.cld.Size = new System.Drawing.Size(78, 50);
             this.cld.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -178,7 +223,7 @@
             // 
             this.blr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.blr.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.blr.Location = new System.Drawing.Point(173, 530);
+            this.blr.Location = new System.Drawing.Point(172, 547);
             this.blr.Name = "blr";
             this.blr.Size = new System.Drawing.Size(78, 50);
             this.blr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -190,7 +235,7 @@
             // 
             this.shrp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.shrp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.shrp.Location = new System.Drawing.Point(89, 530);
+            this.shrp.Location = new System.Drawing.Point(88, 547);
             this.shrp.Name = "shrp";
             this.shrp.Size = new System.Drawing.Size(78, 50);
             this.shrp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -203,7 +248,7 @@
             // 
             this.inv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.inv.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.inv.Location = new System.Drawing.Point(5, 530);
+            this.inv.Location = new System.Drawing.Point(4, 547);
             this.inv.Name = "inv";
             this.inv.Size = new System.Drawing.Size(78, 50);
             this.inv.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -216,7 +261,7 @@
             // 
             this.beginpic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.beginpic.Image = global::one_click.Properties.Resources.begin;
-            this.beginpic.Location = new System.Drawing.Point(300, 143);
+            this.beginpic.Location = new System.Drawing.Point(312, 143);
             this.beginpic.Name = "beginpic";
             this.beginpic.Size = new System.Drawing.Size(250, 250);
             this.beginpic.TabIndex = 0;
@@ -229,9 +274,9 @@
             this.fon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.fon.Image = global::one_click.Properties.Resources.fon;
             this.fon.InitialImage = null;
-            this.fon.Location = new System.Drawing.Point(-1, 526);
+            this.fon.Location = new System.Drawing.Point(-1, 542);
             this.fon.Name = "fon";
-            this.fon.Size = new System.Drawing.Size(816, 59);
+            this.fon.Size = new System.Drawing.Size(856, 65);
             this.fon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fon.TabIndex = 11;
             this.fon.TabStop = false;
@@ -243,9 +288,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(814, 583);
+            this.ClientSize = new System.Drawing.Size(843, 600);
+            this.Controls.Add(this.clock);
             this.Controls.Add(this.power);
-            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pb);
+            this.Controls.Add(this.ht);
+            this.Controls.Add(this.clg);
             this.Controls.Add(this.wlw);
             this.Controls.Add(this.nshv);
             this.Controls.Add(this.hp);
@@ -264,7 +312,10 @@
             this.Name = "mainwindow";
             this.Text = "One Click Editor";
             ((System.ComponentModel.ISupportInitialize)(this.power)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ht)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wlw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nshv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hp)).EndInit();
@@ -293,9 +344,13 @@
         private System.Windows.Forms.PictureBox hp;
         private System.Windows.Forms.PictureBox nshv;
         private System.Windows.Forms.PictureBox wlw;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox clg;
         private System.Windows.Forms.TrackBar power;
         private System.Windows.Forms.PictureBox fon;
+        private System.Windows.Forms.PictureBox ht;
+        private System.Windows.Forms.PictureBox pb;
+        private System.Windows.Forms.PictureBox clock;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

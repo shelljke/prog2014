@@ -63,6 +63,16 @@ namespace one_click.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _12205100050348185 {
+            get {
+                object obj = ResourceManager.GetObject("12205100050348185", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap begin {
             get {
                 object obj = ResourceManager.GetObject("begin", resourceCulture);
@@ -76,6 +86,16 @@ namespace one_click.Properties {
         internal static System.Drawing.Bitmap begin1 {
             get {
                 object obj = ResourceManager.GetObject("begin1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap collage {
+            get {
+                object obj = ResourceManager.GetObject("collage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +123,29 @@ namespace one_click.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pb {
+            get {
+                object obj = ResourceManager.GetObject("pb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ramka {
             get {
                 object obj = ResourceManager.GetObject("ramka", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vignette {
+            get {
+                object obj = ResourceManager.GetObject("vignette", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

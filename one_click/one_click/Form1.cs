@@ -47,8 +47,8 @@ namespace one_click
             beginpic_Click_1(sender, EventArgs.Empty);
         }
 
-        public Bitmap origin_size_image, image_l, nashville1, willow1;
-        public ImagerBitmap dst, dsp, image_l1;
+        public Bitmap origin_size_image, image_l, nashville1, win;
+        public ImagerBitmap dst, dst1, dst2, dst3, dsp, image_l1;
         public float w, h;
         public int a;
 
@@ -112,6 +112,21 @@ namespace one_click
                 willow();
                 wlw.Image = image_l;
 
+                image_l = new Bitmap(origin_size_image, (int)w, (int)h);
+                bp();
+                pb.Image = image_l;
+
+                image_l = new Bitmap(origin_size_image, (int)w, (int)h);
+                heat();
+                ht.Image = image_l;
+
+                h *= 2;
+                w *= 2;
+
+                image_l = new Bitmap(origin_size_image, (int)(w), (int)(h));
+                collage();
+                clg.Image = image_l;
+
                 w = origin_size_image.Width;
                 h = origin_size_image.Height;
 
@@ -158,11 +173,14 @@ namespace one_click
 
         private void blur_Click(object sender, EventArgs e)
         {
+            // backgroundWorker1.RunWorkerAsync();
+
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             blur();
             kern();
             this.BackgroundImage = image_l;
             a = 3;
+
         }
 
         private void cld_Click(object sender, EventArgs e)
@@ -196,6 +214,33 @@ namespace one_click
             a = 7;
             this.BackgroundImage = image_l;
         }
+
+        private void pb_Click(object sender, EventArgs e)
+        {
+            image_l = new Bitmap(origin_size_image, (int)w, (int)h);
+            bp();
+            a = 8;
+            this.BackgroundImage = image_l;
+        }
+
+
+
+        private void ht_Click(object sender, EventArgs e)
+        {
+            image_l = new Bitmap(origin_size_image, (int)w, (int)h);
+            heat();
+            a = 9;
+            this.BackgroundImage = image_l;
+        }
+
+        private void clg_Click(object sender, EventArgs e)
+        {
+            image_l = new Bitmap(origin_size_image, (int)(w / 2), (int)(h / 2));
+            collage();
+            a = 10;
+            this.BackgroundImage = image_l;
+        }
+
 
         void inversion()
         {
@@ -300,9 +345,9 @@ namespace one_click
         {
 
             GC.Collect();
-            willow1 = new Bitmap(one_click.Properties.Resources.ramka, (int)w, (int)h);
+            win = new Bitmap(one_click.Properties.Resources.ramka, (int)w, (int)h);
             dst = new ImagerBitmap(image_l);
-            dsp = new ImagerBitmap(willow1);
+            dsp = new ImagerBitmap(win);
 
             Enumerable.Range(0, (int)w).AsParallel().ForAll(x =>
             {
@@ -325,8 +370,8 @@ namespace one_click
                     byte g1 = color1.G;
                     byte b1 = color1.B;
 
-                   r =(byte)((r*0.35+ ((brght) * r + (1-brght) *100)*0.65));
-                   b = (byte)((b*0.7+((1-brght) * b + (brght) * 255)*0.3));
+                    r = (byte)((r * 0.35 + ((brght) * r + (1 - brght) * 100) * 0.65));
+                    b = (byte)((b * 0.7 + ((1 - brght) * b + (brght) * 255) * 0.3));
 
                     dst.SetPixel(x, y, Color.FromArgb((byte)(r * (1 - brght1) + r1 * brght1), (byte)(g * (1 - brght1) + g1 * brght1), (byte)(b * (1 - brght1) + b1 * brght1)));
                 }
@@ -337,62 +382,6 @@ namespace one_click
             image_l = dst.Bitmap;
         }
 
-        private void save_Click(object sender, EventArgs e)
-        {
-
-            var sfd = new SaveFileDialog();
-            sfd.Filter = "Файл изображения|*.jpg";
-            image_l = new Bitmap(origin_size_image);
-            h = origin_size_image.Height;
-            w = origin_size_image.Width;
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                var fileName = sfd.FileName;
-                var fileStream = File.Create(sfd.FileName);
-
-                switch (a)
-                {
-                    case 0:
-                        image_l = origin_size_image;
-                        break;
-
-                    case 1:
-                        inversion();
-                        kern();
-                        break;
-
-                    case 2:
-                        sharpen();
-                        kern();
-                        break;
-
-                    case 3:
-                        blur();
-                        kern();
-                        break;
-
-                    case 4:
-                        cold();
-                        break;
-
-                    case 5:
-                        hope();
-                        break;
-
-                    case 6:
-                        nashville();
-                        break;
-
-                    case 7:
-                        willow();
-                        break;
-                }
-                image_l.Save(fileStream, origin_size_image.RawFormat);
-                fileStream.Close();
-                image_l.Dispose();
-            }
-        }
         void kern()
         {
 
@@ -491,7 +480,7 @@ namespace one_click
                                b = 168;
                            };
 
-                           dst.SetPixel(x, y, Color.FromArgb((byte)r, (byte)g, (byte)b));
+                           dst.SetPixel(x, y, Color.FromArgb(r, g, b));
                        }
                    });
 
@@ -499,12 +488,13 @@ namespace one_click
             dst.UnlockBitmap();
             image_l = dst.Bitmap;
         }
+
         void nashville()
         {
             GC.Collect();
-            nashville1 = new Bitmap(one_click.Properties.Resources.nashville, (int)w, (int)h);
+            win = new Bitmap(one_click.Properties.Resources.nashville, (int)w, (int)h);
             dst = new ImagerBitmap(image_l);
-            dsp = new ImagerBitmap(nashville1);
+            dsp = new ImagerBitmap(win);
 
             Enumerable.Range(0, (int)w).AsParallel().ForAll(x =>
             {
@@ -539,9 +529,9 @@ namespace one_click
         void willow()
         {
             GC.Collect();
-            willow1 = new Bitmap(one_click.Properties.Resources.willow1, (int)w, (int)h);
+            win = new Bitmap(one_click.Properties.Resources.willow1, (int)w, (int)h);
             dst = new ImagerBitmap(image_l);
-            dsp = new ImagerBitmap(willow1);
+            dsp = new ImagerBitmap(win);
 
             Enumerable.Range(0, (int)w).AsParallel().ForAll(x =>
             {
@@ -565,7 +555,6 @@ namespace one_click
                     g = b = r;
 
                     dst.SetPixel(x, y, Color.FromArgb((byte)(r * (1 - brght1) + r1 * brght1), (byte)(g * (1 - brght1) + g1 * brght1), (byte)(b * (1 - brght1) + b1 * brght1)));
-                    // dst.SetPixel(x, y, Color.FromArgb((byte)(r * brght1 + r1 * (1 - brght1)), (byte)(g * brght1 + g1 * (1 - brght1)), (byte)(b * brght1 + b1 * (1 - brght1))));
 
                 }
             });
@@ -573,9 +562,334 @@ namespace one_click
             dst.UnlockBitmap();
             dsp.UnlockBitmap();
             image_l = dst.Bitmap;
+            win.Dispose();
         }
 
-       
+        void heat()
+        {
+            GC.Collect();
+            win = new Bitmap(one_click.Properties.Resources.vignette, (int)w, (int)h);
+            dst = new ImagerBitmap(image_l);
+            dsp = new ImagerBitmap(win);
+
+            Enumerable.Range(0, (int)w).AsParallel().ForAll(x =>
+            {
+                var color = new Color();
+                var color1 = new Color();
+                for (int y = 0; y < (int)h; y++)
+                {
+                    color = dst.GetPixel(x, y);
+                    color1 = dsp.GetPixel(x, y);
+
+                    float brght = color.GetBrightness();
+
+                    byte r = color.R;
+                    byte g = color.G;
+                    byte b = color.B;
+
+                    byte r1 = color1.R;
+                    byte g1 = color1.G;
+                    byte b1 = color1.B;
+
+                    g = (byte)((g * 0.65 + ((brght) * g + (1 - brght) * 120) * 0.35));
+
+
+                    g = (byte)((g * 0.75 + ((1-brght) * g + (brght) *120) * 0.25));
+                    r = (byte)((r * 0.75 + ((1 - brght) * r + (brght) * 255) * 0.25));
+                    b = (byte)((b * 0.6 + ((1 - brght) * b + (brght) * 25) * 0.4));
+
+
+                    dst.SetPixel(x, y, Color.FromArgb((byte)(r*0.6+r1*0.4) , (byte)(g*0.6+g1*0.4), (byte)(b*0.6+b1*0.4)));
+                }
+            });
+
+            dst.UnlockBitmap();
+
+            image_l = dst.Bitmap;
+        }
+
+        void bp()
+        {
+            GC.Collect();
+            win = new Bitmap(one_click.Properties.Resources.pb, (int)w, (int)h);
+            dst = new ImagerBitmap(image_l);
+            dsp = new ImagerBitmap(win);
+
+            Enumerable.Range(0, (int)w).AsParallel().ForAll(x =>
+            {
+                var color = new Color();
+                var color1 = new Color();
+                for (int y = 0; y < (int)h; y++)
+                {
+                    color = dst.GetPixel(x, y);
+                    color1 = dsp.GetPixel(x, y);
+                    float brght = color.GetBrightness();
+
+                    byte r = color.R;
+                    byte g = color.G;
+                    byte b = color.B;
+
+                    float brght1 = color1.GetBrightness();
+                    byte r1 = color1.R;
+                    byte g1 = color1.G;
+                    byte b1 = color1.B;
+
+                    if (brght < 0.15)
+                    {
+                        b = 50;
+                    }
+
+                    dst.SetPixel(x, y, Color.FromArgb((byte)(r * 0.3 + r1 * 0.7), (byte)(g * 0.9 + g1 * 0.1), (byte)(b * 0.9 + b1 * 0.1)));
+
+                }
+            });
+
+            dst.UnlockBitmap();
+            dsp.UnlockBitmap();
+            image_l = dst.Bitmap;
+            win.Dispose();
+        }
+
+        void collage()
+        {
+            GC.Collect();
+
+
+            win = new Bitmap(one_click.Properties.Resources.collage, (int)(w + w / 10), (int)(h + h / 10));
+
+            dsp = new ImagerBitmap(image_l);
+
+            dst = new ImagerBitmap(win);
+
+
+            Enumerable.Range(0, (int)(w / 2)).AsParallel().ForAll(x =>
+            {
+                var color = new Color();
+
+
+                for (int y = 0; y < (int)(h / 2); y++)
+                {
+                    color = dsp.GetPixel(x, y);
+
+
+                    float brght = color.GetBrightness();
+
+
+                    byte r = color.R;
+                    byte g = color.G;
+                    byte b = color.B;
+
+                    if (brght < 0.15)
+                    {
+                        b = 100;
+                    }
+
+                    if (brght >= 0.15 & brght < 0.3)
+                    {
+                        r = 50;
+                        b = 50;
+                    }
+
+                    if (brght >= 0.3 & brght < 0.85)
+                    {
+                        r = 255;
+                        g = 0;
+                        b = 50;
+                    }
+
+                    if (brght >= 0.85)
+                    {
+                        g = 200;
+                        b = 100;
+                    }
+                    dst.SetPixel((int)(x + w / 30), (int)(y + h / 30), Color.FromArgb(r, g, b));
+
+                    /////////////////////////////////////////////
+                    r = color.R;
+                    g = color.G;
+                    b = color.B;
+
+                    if (brght < 0.15)
+                    {
+                        r = 20;
+                        g = 20;
+                    }
+
+                    if (brght >= 0.15 & brght < 0.3)
+                    {
+                        g = 150;
+                        b = 150;
+                    }
+
+                    if (brght >= 0.3 & brght < 0.85)
+                    {
+                        r = 55;
+                        b = 255;
+                    }
+
+                    if (brght >= 0.85)
+                    {
+                        r = 190;
+                        g -= 50;
+                        b = 255;
+                    }
+                    dst.SetPixel((int)(x + 17 * w / 30), (int)(y + h / 30), Color.FromArgb(r, g, b));
+
+                    /////////////////////////////////////////////
+                    r = color.R;
+                    g = color.G;
+                    b = color.B;
+
+                    if (brght < 0.15)
+                    {
+                        b = 75;
+                        r = 75;
+                    }
+
+                    if (brght >= 0.15 & brght < 0.3)
+                    {
+                        r = 50;
+                        b = 150;
+                    }
+
+                    if (brght >= 0.3 & brght < 0.85)
+                    {
+                        r = 255;
+                        g = 175;
+                        // b = 250;
+                    }
+
+                    if (brght >= 0.85)
+                    {
+                        g = 200;
+                        b = 100;
+                    }
+                    dst.SetPixel((int)(x + 17 * w / 30), (int)(y + 17 * h / 30), Color.FromArgb(r, g, b));
+
+                    /////////////////////////////////////////////
+                    r = color.R;
+                    g = color.G;
+                    b = color.B;
+
+                    if (brght < 0.15)
+                    {
+                        b = 100;
+                        g = 100;
+                    }
+
+                    if (brght >= 0.15 & brght < 0.3)
+                    {
+                        r = 50;
+                        b = 50;
+                    }
+
+                    if (brght >= 0.3 & brght < 0.85)
+                    {
+                        r -= 10;
+                        g = 250;
+                        b += 25;
+                    }
+
+                    if (brght >= 0.85)
+                    {
+                        g = 210;
+                        b = 150;
+                        r = 15;
+                    }
+                    dst.SetPixel((int)(x + w / 30), (int)(y + 17 * h / 30), Color.FromArgb(r, g, b));
+
+                }
+            });
+
+
+
+            dst.UnlockBitmap();
+            dsp.UnlockBitmap();
+
+            image_l = dst.Bitmap;
+
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+
+            var sfd = new SaveFileDialog();
+            sfd.Filter = "Файл изображения|*.jpg";
+            image_l = new Bitmap(origin_size_image);
+            h = origin_size_image.Height;
+            w = origin_size_image.Width;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                var fileName = sfd.FileName;
+                var fileStream = File.Create(sfd.FileName);
+
+                switch (a)
+                {
+                    case 0:
+                        image_l = origin_size_image;
+                        break;
+
+                    case 1:
+                        inversion();
+                        kern();
+                        break;
+
+                    case 2:
+                        sharpen();
+                        kern();
+                        break;
+
+                    case 3:
+                        blur();
+                        kern();
+                        break;
+
+                    case 4:
+                        cold();
+                        break;
+
+                    case 5:
+                        hope();
+                        break;
+
+                    case 6:
+                        nashville();
+                        break;
+
+                    case 7:
+                        willow();
+                        break;
+
+                    case 8:
+                        bp();
+                        break;
+
+                    case 9:
+                        heat();
+                        break;
+
+                    case 10:
+                        image_l = new Bitmap(origin_size_image, (int)(w / 2), (int)(h / 2));
+                        collage();
+                        break;
+                }
+                image_l.Save(fileStream, origin_size_image.RawFormat);
+                fileStream.Close();
+                image_l.Dispose();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            clock.Show();
+        }
+
+
+
+
+
+
 
     }
 }

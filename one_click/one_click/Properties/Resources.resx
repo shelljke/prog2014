@@ -127,8 +127,17 @@
   <data name="willow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\willow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pb.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ramka" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ramka.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="begin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\begin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="12205100050348185" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\12205100050348185.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Без имени-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Без имени-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,10 +145,13 @@
   <data name="willow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\willow1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="collage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\collage.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="begin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\begin.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ramka" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ramka.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="vignette" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vignette.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
