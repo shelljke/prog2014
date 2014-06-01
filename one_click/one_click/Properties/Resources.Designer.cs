@@ -153,6 +153,16 @@ namespace one_click.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap vignette1 {
+            get {
+                object obj = ResourceManager.GetObject("vignette1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap willow {
             get {
                 object obj = ResourceManager.GetObject("willow", resourceCulture);

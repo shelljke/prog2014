@@ -33,7 +33,6 @@
             this.open = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
             this.power = new System.Windows.Forms.TrackBar();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.clock = new System.Windows.Forms.PictureBox();
             this.pb = new System.Windows.Forms.PictureBox();
             this.ht = new System.Windows.Forms.PictureBox();
@@ -47,6 +46,7 @@
             this.inv = new System.Windows.Forms.PictureBox();
             this.beginpic = new System.Windows.Forms.PictureBox();
             this.fon = new System.Windows.Forms.PictureBox();
+            this.reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.power)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
@@ -101,9 +101,10 @@
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(584, -4);
+            this.save.Enabled = false;
+            this.save.Location = new System.Drawing.Point(601, -4);
             this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(261, 23);
+            this.save.Size = new System.Drawing.Size(243, 23);
             this.save.TabIndex = 4;
             this.save.Text = "Сохранить";
             this.save.UseVisualStyleBackColor = true;
@@ -120,10 +121,6 @@
             this.power.TabIndex = 10;
             this.power.TickStyle = System.Windows.Forms.TickStyle.None;
             this.power.Visible = false;
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // clock
             // 
@@ -145,6 +142,7 @@
             this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb.TabIndex = 9;
             this.pb.TabStop = false;
+            this.pb.Visible = false;
             this.pb.Click += new System.EventHandler(this.pb_Click);
             // 
             // ht
@@ -157,6 +155,7 @@
             this.ht.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.ht.TabIndex = 9;
             this.ht.TabStop = false;
+            this.ht.Visible = false;
             this.ht.Click += new System.EventHandler(this.ht_Click);
             // 
             // clg
@@ -169,6 +168,7 @@
             this.clg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.clg.TabIndex = 9;
             this.clg.TabStop = false;
+            this.clg.Visible = false;
             this.clg.Click += new System.EventHandler(this.clg_Click);
             // 
             // wlw
@@ -181,6 +181,7 @@
             this.wlw.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.wlw.TabIndex = 9;
             this.wlw.TabStop = false;
+            this.wlw.Visible = false;
             this.wlw.Click += new System.EventHandler(this.wlw_Click);
             // 
             // nshv
@@ -193,6 +194,7 @@
             this.nshv.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.nshv.TabIndex = 9;
             this.nshv.TabStop = false;
+            this.nshv.Visible = false;
             this.nshv.Click += new System.EventHandler(this.nshv_Click);
             // 
             // hp
@@ -205,6 +207,7 @@
             this.hp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.hp.TabIndex = 9;
             this.hp.TabStop = false;
+            this.hp.Visible = false;
             this.hp.Click += new System.EventHandler(this.hp_Click);
             // 
             // cld
@@ -217,6 +220,7 @@
             this.cld.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.cld.TabIndex = 9;
             this.cld.TabStop = false;
+            this.cld.Visible = false;
             this.cld.Click += new System.EventHandler(this.cld_Click);
             // 
             // blr
@@ -229,6 +233,7 @@
             this.blr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.blr.TabIndex = 8;
             this.blr.TabStop = false;
+            this.blr.Visible = false;
             this.blr.Click += new System.EventHandler(this.blur_Click);
             // 
             // shrp
@@ -241,6 +246,7 @@
             this.shrp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.shrp.TabIndex = 7;
             this.shrp.TabStop = false;
+            this.shrp.Visible = false;
             this.shrp.WaitOnLoad = true;
             this.shrp.Click += new System.EventHandler(this.shrp_Click);
             // 
@@ -254,6 +260,7 @@
             this.inv.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.inv.TabIndex = 6;
             this.inv.TabStop = false;
+            this.inv.Visible = false;
             this.inv.WaitOnLoad = true;
             this.inv.Click += new System.EventHandler(this.inv_Click);
             // 
@@ -282,6 +289,18 @@
             this.fon.TabStop = false;
             this.fon.Visible = false;
             // 
+            // reset
+            // 
+            this.reset.Enabled = false;
+            this.reset.Location = new System.Drawing.Point(307, -4);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(243, 23);
+            this.reset.TabIndex = 13;
+            this.reset.Text = "Показать оригинал";
+            this.reset.UseVisualStyleBackColor = true;
+            this.reset.Visible = false;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
             // mainwindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,6 +308,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(843, 600);
+            this.Controls.Add(this.reset);
             this.Controls.Add(this.clock);
             this.Controls.Add(this.power);
             this.Controls.Add(this.pb);
@@ -350,7 +370,7 @@
         private System.Windows.Forms.PictureBox ht;
         private System.Windows.Forms.PictureBox pb;
         private System.Windows.Forms.PictureBox clock;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button reset;
     }
 }
 

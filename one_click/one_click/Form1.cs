@@ -36,10 +36,10 @@ namespace one_click
 
             open.Show();
             save.Show();
+            reset.Show();
 
-            //   power.Show();
 
-            fon.Show();
+
         }
 
         private void begin_Click(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace one_click
         }
 
         public Bitmap origin_size_image, image_l, nashville1, win;
-        public ImagerBitmap dst, dst1, dst2, dst3, dsp, image_l1;
+        public ImagerBitmap dst, dsp, image_l1;
         public float w, h;
         public int a;
 
@@ -58,6 +58,18 @@ namespace one_click
             var result = op.ShowDialog(this);
             if (result == DialogResult.OK)
             {
+                fon.Show();
+                inv.Show();
+                shrp.Show();
+                blr.Show();
+                cld.Show();
+                hp.Show();
+                nshv.Show();
+                wlw.Show();
+                pb.Show();
+                ht.Show();
+                clg.Show();
+
                 if (origin_size_image != null)
                 {
                     origin_size_image.Dispose();
@@ -144,7 +156,6 @@ namespace one_click
                 }
                 image_l = new Bitmap(origin_size_image, (int)w, (int)h);
 
-                // this.BackgroundImage = image_l;
                 this.BackgroundImage = image_l;
                 this.BackColor = Color.Black;
                 fon.Show();
@@ -154,6 +165,8 @@ namespace one_click
 
         private void inv_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             inversion();
             kern();
@@ -163,7 +176,8 @@ namespace one_click
 
         private void shrp_Click(object sender, EventArgs e)
         {
-
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             sharpen();
             kern();
@@ -173,10 +187,15 @@ namespace one_click
 
         private void blur_Click(object sender, EventArgs e)
         {
-            // backgroundWorker1.RunWorkerAsync();
-
+            //clock.Show();
+            save.Enabled = true;
+            reset.Enabled = true;
+            
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             blur();
+         //   System.Threading.Thread th = new System.Threading.Thread(kern);
+           // th.Start();
+
             kern();
             this.BackgroundImage = image_l;
             a = 3;
@@ -185,6 +204,8 @@ namespace one_click
 
         private void cld_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             cold();
             this.BackgroundImage = image_l;
@@ -193,6 +214,8 @@ namespace one_click
 
         private void hp_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             hope();
             a = 5;
@@ -201,6 +224,8 @@ namespace one_click
 
         private void nshv_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             nashville();
             a = 6;
@@ -209,6 +234,8 @@ namespace one_click
 
         private void wlw_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             willow();
             a = 7;
@@ -217,16 +244,18 @@ namespace one_click
 
         private void pb_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             bp();
             a = 8;
             this.BackgroundImage = image_l;
         }
 
-
-
         private void ht_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)w, (int)h);
             heat();
             a = 9;
@@ -235,6 +264,8 @@ namespace one_click
 
         private void clg_Click(object sender, EventArgs e)
         {
+            save.Enabled = true;
+            reset.Enabled = true;
             image_l = new Bitmap(origin_size_image, (int)(w / 2), (int)(h / 2));
             collage();
             a = 10;
@@ -582,7 +613,8 @@ namespace one_click
                     color1 = dsp.GetPixel(x, y);
 
                     float brght = color.GetBrightness();
-
+                    float brght1 = color1.GetBrightness();
+                
                     byte r = color.R;
                     byte g = color.G;
                     byte b = color.B;
@@ -598,8 +630,8 @@ namespace one_click
                     r = (byte)((r * 0.75 + ((1 - brght) * r + (brght) * 255) * 0.25));
                     b = (byte)((b * 0.6 + ((1 - brght) * b + (brght) * 25) * 0.4));
 
-
-                    dst.SetPixel(x, y, Color.FromArgb((byte)(r*0.6+r1*0.4) , (byte)(g*0.6+g1*0.4), (byte)(b*0.6+b1*0.4)));
+                   // dst.SetPixel(x, y, Color.FromArgb((byte)( r1 ), (byte)( g1 ), (byte)( b1 )));
+                    dst.SetPixel(x, y, Color.FromArgb((byte)(r * brght1 + r1 * (1 - brght1)), (byte)(g * brght1 + g1 * (1 - brght1)), (byte)(b * brght1 + b1 * (1-brght1))));
                 }
             });
 
@@ -880,11 +912,21 @@ namespace one_click
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+
+
+        private void reset_Click(object sender, EventArgs e)
         {
-            clock.Show();
+            save.Enabled = false;
+            reset.Enabled = false;
+            this.BackgroundImage = origin_size_image;
         }
 
+        private void Thr()
+        {
+            
+            clock.Show();
+        }
+ 
 
 
 

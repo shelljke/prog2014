@@ -51,6 +51,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1338409264_289.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge.Imaging">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\AForge.NET\IPLab\References\AForge.NET\AForge.Imaging.dll</HintPath>
@@ -133,10 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\12205100050348185.gif" />
+    <Content Include="1338409264_289.ico" />
     <Content Include="Resources\collage.jpg" />
     <Content Include="Resources\nashville.jpg" />
     <Content Include="Resources\pb.jpg" />
     <Content Include="Resources\ramka.jpg" />
+    <None Include="Resources\vignette.png" />
     <Content Include="Resources\vignette.jpg" />
     <Content Include="Resources\willow1.jpg" />
     <Content Include="Resources\willow.png" />
