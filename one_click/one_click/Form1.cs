@@ -38,7 +38,7 @@ namespace one_click
             save.Show();
             reset.Show();
 
-
+            open_Click(sender, EventArgs.Empty);
 
         }
 
